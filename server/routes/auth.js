@@ -12,20 +12,19 @@ const router = express.Router()
 // define routes
 router.post('/register', register, token.issue)
 router.post('/signin', signIn, token.issue)
-router.get('/user', verifyJwt({secret: process.env.JWT_SECRET, algorithms: ['HS256']}), getUser)
-
+router.get('/user', verifyJwt({ secret: process.env.JWT_SECRET, algorithms: ['HS256'] }), getUser)
 
 // supporting functions to routs
 function register (req, res, next) {
   const { username, password } = req.body
-  createUser({username, password})
+  createUser({ username, password })
     .then(([id]) => {
       res.locals.userId = id
       next()
     })
-    .catch(({message}) => {
+    .catch(({ message }) => {
       // todo research how this works in Postgres
-      if(message.includes('UNIQUE constraint failed: users.username')){
+      if (message.includes('UNIQUE constraint failed: users.username')) {
         return res.status(400).json({
           ok: false,
           message: 'Username already exists.'
@@ -53,7 +52,7 @@ function signIn (req, res, next) {
 
 function getUser (req, res) {
   getUserById(req.user.id)
-    .then(({username}) => res.json({
+    .then(({ username }) => res.json({
       ok: true,
       username
     }))

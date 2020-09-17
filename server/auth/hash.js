@@ -4,7 +4,7 @@ const sodium = require('libsodium-wrappers')
 // define module functions
 // returns a hash of a password string for storing in db
 function generateHash (password) {
-  return sodium.ready.then(() => 
+  return sodium.ready.then(() =>
     sodium.crypto_pwhash_str(
       password,
       sodium.crypto_pwhash_OPSLIMIT_INTERACTIVE,

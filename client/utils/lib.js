@@ -1,6 +1,5 @@
 // UTIITIES LIBARY FOR FRONTEND SUPPORTING FUNCTIONS
 
-
 // _____ AUTH/JWT FUNCTIONS ______
 
 // set JWT token in local storage
@@ -16,7 +15,7 @@ export function getToken () {
 // checks to see if user is authenticated or not
 export function isAuthenticated () {
   const authToken = getToken()
-  if(authToken != null){
+  if (authToken != null) {
     return true
   } else {
     return false

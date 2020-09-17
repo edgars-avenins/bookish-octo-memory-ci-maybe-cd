@@ -7,34 +7,31 @@ import { USER_LOG_OFF, logIn, saveUser, newUserLogIn } from '../actions'
 import { isAuthenticated } from '../utils/lib'
 import { getUserDetails } from '../apis'
 
-
-// define class component 
+// define class component
 export class App extends React.Component {
-
   // set inital state
   state = {
     signInUser: '',
     signInPassword: '',
     registerUser: '',
     registerPassword: '',
-    registerConfirmPassword: '',
+    registerConfirmPassword: ''
   }
 
   // inital auth validation call
-  componentDidMount(){
+  componentDidMount () {
     isAuthenticated() && getUserDetails()
-    .then(userDetails => {this.props.dispatch(saveUser(userDetails))})
+      .then(userDetails => { this.props.dispatch(saveUser(userDetails)) })
   }
-
 
   // event handler for input events
   handleChange = event => {
-    this.setState({[event.target.name]: event.target.value})
+    this.setState({ [event.target.name]: event.target.value })
   }
-  
+
   // event handler for user log off
   handleLogOff = () => {
-    this.props.dispatch({type: USER_LOG_OFF})
+    this.props.dispatch({ type: USER_LOG_OFF })
   }
 
   // event handler for user sign in
@@ -59,7 +56,7 @@ export class App extends React.Component {
   handleRegister = event => {
     event.preventDefault()
     // passwords match validation
-    if(this.state.registerPassword === this.state.registerConfirmPassword){
+    if (this.state.registerPassword === this.state.registerConfirmPassword) {
       // POST register action call
       this.props.dispatch(newUserLogIn({
         username: this.state.registerUser,
@@ -73,8 +70,7 @@ export class App extends React.Component {
         registerPassword: '',
         registerConfirmPassword: ''
       })
-    } 
-    else{
+    } else {
       // clear bad passwords
       this.setState({
         registerPassword: '',
@@ -84,8 +80,8 @@ export class App extends React.Component {
   }
 
   // render the App component
-  render(){
-    return(
+  render () {
+    return (
       <>
         <h1>Development has begun</h1>
         <h2>Behold I am the App component</h2>
@@ -116,18 +112,17 @@ export class App extends React.Component {
 
         {/* log out functionality call/username display */}
         <h2>Example of logged in user</h2>
-        {this.props.user.hasOwnProperty('username')? <p>Hello {this.props.user.username}</p>: <p>you are not logged in</p>}
+        {this.props.user.hasOwnProperty('username') ? <p>Hello {this.props.user.username}</p> : <p>you are not logged in</p>}
         <button onClick={this.handleLogOff}>Log Off</button>
       </>
     )
   }
 }
 
-function mapStateToProps(globalState) {
+function mapStateToProps (globalState) {
   return {
     user: globalState.user
   }
 }
-
 
 export default connect(mapStateToProps)(App)

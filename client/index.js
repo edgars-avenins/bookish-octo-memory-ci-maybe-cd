@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 // render function
-function render() {
+function render () {
   ReactDom.render(
     <Provider store={store}>
       <App />

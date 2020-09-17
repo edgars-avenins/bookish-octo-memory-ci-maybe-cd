@@ -23,7 +23,7 @@ module.exports = {
     client: 'sqlite3',
     useNullAsDefault: true,
     connection: {
-      filename: ':memory:',
+      filename: ':memory:'
     },
     migrations: {
       directory: path.join(__dirname, 'server/db/migrations')
@@ -37,7 +37,7 @@ module.exports = {
     client: 'postgresql',
     connection: {
       database: 'my_db',
-      user:     'username',
+      user: 'username',
       password: 'password'
     },
     pool: {
@@ -53,7 +53,7 @@ module.exports = {
     client: 'postgresql',
     connection: {
       database: 'my_db',
-      user:     'username',
+      user: 'username',
       password: 'password'
     },
     pool: {
@@ -65,4 +65,4 @@ module.exports = {
     }
   }
 
-};
+}

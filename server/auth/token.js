@@ -2,16 +2,16 @@
 const jwt = require('jsonwebtoken')
 
 // define module funtion
-function issue (req,res) {
+function issue (req, res) {
   res.json({
-    ok:true,
+    ok: true,
     message: 'Authentication successful.',
     token: createToken(res.locals.userId)
   })
 }
 
 function createToken (id) {
-  return jwt.sign({id}, process.env.JWT_SECRET, {expiresIn: '1d'})
+  return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: '1d' })
 }
 
 // export token module
